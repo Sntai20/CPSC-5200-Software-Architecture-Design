@@ -31,5 +31,4 @@ public class WebhooksSender(IHttpClientFactory httpClientFactory, ILogger<Webhoo
 
         return client.SendAsync(request);
     }
-
 }

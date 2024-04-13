@@ -25,5 +25,4 @@ public class WebhookSubscriptionRequest : IValidatableObject
             yield return new ValidationResult($"{Event} is invalid event name", new[] { nameof(Event) });
         }
     }
-
 }
