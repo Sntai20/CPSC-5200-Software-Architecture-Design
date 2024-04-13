@@ -9,7 +9,6 @@
       "src\\HybridApp\\HybridApp.csproj",
       "src\\Identity.API\\Identity.API.csproj",
       "src\\IntegrationEventLogEF\\IntegrationEventLogEF.csproj",
-      "src\\Mobile.Bff.Shopping\\Mobile.Bff.Shopping.csproj",
       "src\\OrderProcessor\\OrderProcessor.csproj",
       "src\\Ordering.API\\Ordering.API.csproj",
       "src\\Ordering.Domain\\Ordering.Domain.csproj",
