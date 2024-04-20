@@ -1,55 +1,44 @@
-# CPSC-5200-Software-Architecture-Design
+# Deploy a cloud-native application automatically
 
-CPSC 5200 Software Architecture and Design based on the eShop reference Application - "Northern Mountains"
+The code in this repository supports a Learn module focused on automating CI/CD with .NET. The module shows you how to:
 
-A reference .NET application implementing an eCommerce web site using a services-based architecture.
+- Authenticate GitHub Actions to a container registry.
+- Securely store sensitive information that GitHub Actions uses.
+- Implement an action to build the container image for a microservice.
+- Modify and commit the microservice code to trigger a build.
+- Implement an action to deploy the updated container to an Azure Kubernetes Service (AKS) cluster.
+- Modify and commit a Helm chart to trigger the deployment.
+- Revert the microservice to the previous deployment.
 
-![eShop Reference Application architecture diagram](img/eshop_architecture.png)
+Take the moudle on [Microsoft Learn Training](https://learn.microsoft.com/training/modules/microservices-devops-aspnet-core/)
 
-![eShop homepage screenshot](img/eshop_homepage.png)
+# Contributing
 
-## Getting Started
+This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
+the rights to use your contribution. For details, visit https://cla.microsoft.com.
 
-### Prerequisites
+When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
+a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
+provided by the bot. You will only need to do this once across all repos using our CLA.
 
-- Clone the eShop repository: https://github.com/dotnet/eshop
-- (Windows only) Install Visual Studio. Visual Studio contains tooling support for .NET Aspire that you will want to have. [Visual Studio 2022 version 17.10 Preview](https://visualstudio.microsoft.com/vs/preview/).
-  - During installation, ensure that the following are selected:
-    - `ASP.NET and web development` workload.
-    - `.NET Aspire SDK` component in `Individual components`.
-- Install the latest [.NET 8 SDK](https://github.com/dotnet/installer#installers-and-binaries)
-- On Mac/Linux (or if not using Visual Studio), install the Aspire workload with the following commands:
-```powershell
-dotnet workload update
-dotnet workload install aspire
-dotnet restore eShop.Web.slnf
-```
-- Install & start Docker Desktop:  https://docs.docker.com/engine/install/
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-### Running the solution
+# Legal Notices
 
-> [!WARNING]
-> Remember to ensure that Docker is started
+Microsoft and any contributors grant you a license to the Microsoft documentation and other content
+in this repository under the [Creative Commons Attribution 4.0 International Public License](https://creativecommons.org/licenses/by/4.0/legalcode),
+see the [LICENSE](LICENSE) file, and grant you a license to any code in the repository under the [MIT License](https://opensource.org/licenses/MIT), see the
+[LICENSE-CODE](LICENSE-CODE) file.
 
-* (Windows only) Run the application from Visual Studio:
- - Open the `eShop.Web.slnf` file in Visual Studio
- - Ensure that `eShop.AppHost.csproj` is your startup project
- - Hit Ctrl-F5 to launch Aspire
+Microsoft, Windows, Microsoft Azure and/or other Microsoft products and services referenced in the documentation
+may be either trademarks or registered trademarks of Microsoft in the United States and/or other countries.
+The licenses for this project do not grant you rights to use any Microsoft names, logos, or trademarks.
+Microsoft's general trademark guidelines can be found at http://go.microsoft.com/fwlink/?LinkID=254653.
 
-* Or run the application from your terminal:
-```powershell
-dotnet run --project src/eShop.AppHost/eShop.AppHost.csproj
-```
-then look for lines like this in the console output in order to find the URL to open the Aspire dashboard:
-```sh
-Now listening on: http://localhost:18848
-```
+Privacy information can be found at https://privacy.microsoft.com/en-us/
 
-### Sample data
-
-The sample catalog data is defined in [catalog.json](https://github.com/dotnet/eShop/blob/main/src/Catalog.API/Setup/catalog.json). Those product names, descriptions, and brand names are fictional and were generated using [GPT-35-Turbo](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/chatgpt), and the corresponding [product images](https://github.com/dotnet/eShop/tree/main/src/Catalog.API/Pics) were generated using [DALL·E 3](https://openai.com/dall-e-3).
-
-
-## Contributing
-
-For more information on contributing to this repo, please read [the contribution documentation](./CONTRIBUTING.md) and [the Code of Conduct](CODE-OF-CONDUCT.md).
+Microsoft and any contributors reserve all other rights, whether under their respective copyrights, patents,
+or trademarks, whether by implication, estoppel or otherwise.
