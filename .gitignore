@@ -397,3 +397,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/eShopLite.ProductService/Database.db
+/eShopLite.ProductService/Database.db-shm
+/eShopLite.ProductService/Database.db-wal
