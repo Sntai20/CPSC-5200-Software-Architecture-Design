@@ -1,6 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace DataEntities;
 
-namespace DataEntities;
+using System.Text.Json.Serialization;
 
 public class Product
 {

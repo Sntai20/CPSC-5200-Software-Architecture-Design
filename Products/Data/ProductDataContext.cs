@@ -1,7 +1,7 @@
-﻿using DataEntities;
-using Microsoft.EntityFrameworkCore;
+﻿namespace Products.Data;
 
-namespace Products.Data;
+using DataEntities;
+using Microsoft.EntityFrameworkCore;
 
 public class ProductDataContext : DbContext
 {

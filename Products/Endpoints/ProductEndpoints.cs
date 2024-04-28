@@ -1,8 +1,8 @@
-﻿using DataEntities;
+﻿namespace Products.Endpoints;
+
+using DataEntities;
 using Microsoft.EntityFrameworkCore;
 using Products.Data;
-
-namespace Products.Endpoints;
 
 public static class ProductEndpoints
 {
