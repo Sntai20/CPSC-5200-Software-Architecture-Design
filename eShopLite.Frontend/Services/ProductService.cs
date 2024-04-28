@@ -3,16 +3,8 @@
 using DataEntities;
 using System.Text.Json;
 
-public class ProductService
+public class ProductService(HttpClient httpClient, ILogger<ProductService> logger)
 {
-    HttpClient httpClient;
-    private readonly ILogger<ProductService> _logger;
-
-    public ProductService(HttpClient httpClient, ILogger<ProductService> logger)
-    {
-        _logger = logger;
-        this.httpClient = httpClient;
-    }
     public async Task<List<Product>> GetProducts()
     {
         List<Product>? products = null;
@@ -21,8 +13,8 @@ public class ProductService
             var response = await httpClient.GetAsync("/api/Product");
             var responseText = await response.Content.ReadAsStringAsync();
 
-            _logger.LogInformation($"Http status code: {response.StatusCode}");
-            _logger.LogInformation($"Http response content: {responseText}");
+            logger.LogInformation($"Http status code: {response.StatusCode}");
+            logger.LogInformation($"Http response content: {responseText}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -36,7 +28,7 @@ public class ProductService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error during GetProducts.");
+            logger.LogError(ex, "Error during GetProducts.");
         }
 
         return products ?? new List<Product>();

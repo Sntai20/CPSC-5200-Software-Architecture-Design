@@ -3,13 +3,8 @@
 using DataEntities;
 using Microsoft.EntityFrameworkCore;
 
-public class ProductDataContext : DbContext
+public class ProductDataContext(DbContextOptions<ProductDataContext> options) : DbContext(options)
 {
-    public ProductDataContext (DbContextOptions<ProductDataContext> options)
-        : base(options)
-    {
-    }
-
     public DbSet<Product> Product { get; set; } = default!;
 }
 
