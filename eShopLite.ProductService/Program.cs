@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Products.Data;
-using Products.Endpoints;
+using eShopLite.ProductService.Data;
+using eShopLite.ProductService.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ProductDataContext>(options =>

@@ -1,4 +1,4 @@
-﻿namespace Products.Data;
+﻿namespace eShopLite.ProductService.Data;
 
 using DataEntities;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +21,7 @@ public static class Extensions
 
         var services = scope.ServiceProvider;
         var context = services.GetRequiredService<ProductDataContext>();
+        
         context.Database.EnsureCreated();
         DbInitializer.Initialize(context);
     }

@@ -1,5 +1,5 @@
-﻿using Store.Components;
-using Store.Services;
+﻿using eShopLite.Frontend.Components;
+using eShopLite.Frontend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

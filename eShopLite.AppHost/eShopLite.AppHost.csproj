@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Products\Products.csproj" />
-    <ProjectReference Include="..\Store\Store.csproj" />
+    <ProjectReference Include="..\eShopLite.ProductService\eShopLite.ProductService.csproj" />
+    <ProjectReference Include="..\eShopLite.Frontend\eShopLite.Frontend.csproj" />
   </ItemGroup>
 
 </Project>

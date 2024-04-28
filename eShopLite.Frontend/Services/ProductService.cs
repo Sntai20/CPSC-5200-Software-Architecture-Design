@@ -1,4 +1,4 @@
-﻿namespace Store.Services;
+﻿namespace eShopLite.Frontend.Services;
 
 using DataEntities;
 using System.Text.Json;
@@ -41,5 +41,4 @@ public class ProductService
 
         return products ?? new List<Product>();
     }
-    
 }

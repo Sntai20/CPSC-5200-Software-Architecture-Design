@@ -1,8 +1,8 @@
-﻿namespace Products.Endpoints;
+﻿namespace eShopLite.ProductService.Endpoints;
 
 using DataEntities;
 using Microsoft.EntityFrameworkCore;
-using Products.Data;
+using eShopLite.ProductService.Data;
 
 public static class ProductEndpoints
 {

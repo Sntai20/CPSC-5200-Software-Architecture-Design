@@ -1,6 +1,6 @@
 ﻿var builder = DistributedApplication.CreateBuilder(args);
 
-var products = builder.AddProject<Projects.Products>("products");
-builder.AddProject<Projects.Store>("store").WithReference(products);
+var products = builder.AddProject<Projects.eShopLite_ProductService>("productservice");
+builder.AddProject<Projects.eShopLite_Frontend>("frontend").WithReference(products);
 
 builder.Build().Run();
