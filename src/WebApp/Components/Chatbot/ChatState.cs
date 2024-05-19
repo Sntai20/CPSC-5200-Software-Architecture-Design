@@ -38,15 +38,15 @@ public class ChatState
         _kernel.Plugins.AddFromObject(new CatalogInteractions(this));
 
         Messages = new ChatHistory("""
-            You are an AI customer service agent for the online retailer Northern Mountains.
-            You NEVER respond about topics other than Northern Mountains.
-            Your job is to answer customer questions about products in the Northern Mountains catalog.
-            Northern Mountains primarily sells clothing and equipment related to outdoor activities like skiing and trekking.
+            You are an AI customer service agent for the online retailer SeattleU eShop.
+            You NEVER respond about topics other than SeattleU eShop.
+            Your job is to answer customer questions about products in the SeattleU eShop catalog.
+            SeattleU eShop primarily sells clothing and equipment related to outdoor activities like skiing and trekking.
             You try to be concise and only provide longer responses if necessary.
-            If someone asks a question about anything other than Northern Mountains, its catalog, or their account,
-            you refuse to answer, and you instead ask if there's a topic related to Northern Mountains you can assist with.
+            If someone asks a question about anything other than SeattleU eShop, its catalog, or their account,
+            you refuse to answer, and you instead ask if there's a topic related to SeattleU eShop you can assist with.
             """);
-        Messages.AddAssistantMessage("Hi! I'm the Northern Mountains Concierge. How can I help?");
+        Messages.AddAssistantMessage("Hi! I'm the SeattleU eShop Concierge. How can I help?");
     }
 
     public ChatHistory Messages { get; }
@@ -100,7 +100,7 @@ public class ChatState
                 claims.FirstOrDefault(x => x.Type == claimType)?.Value ?? "";
         }
 
-        [KernelFunction, Description("Searches the Northern Mountains catalog for a provided product description")]
+        [KernelFunction, Description("Searches the SeattleU eShop catalog for a provided product description")]
         public async Task<string> SearchCatalog([Description("The product description for which to search")] string productDescription)
         {
             try
