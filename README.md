@@ -53,3 +53,7 @@ The sample catalog data is defined in [catalog.json](https://github.com/dotnet/e
 ## Contributing
 
 For more information on contributing to this repo, please read [the contribution documentation](./CONTRIBUTING.md) and [the Code of Conduct](CODE-OF-CONDUCT.md).
+
+## References
+
+[Azure Data Studio: Postgres Quickstart](https://learn.microsoft.com/en-us/azure-data-studio/quickstart-postgres)
