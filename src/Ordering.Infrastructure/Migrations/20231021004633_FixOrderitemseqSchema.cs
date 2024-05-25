@@ -1,68 +1,67 @@
 ﻿#nullable disable
 
-namespace Ordering.Infrastructure.Migrations
+namespace Ordering.Infrastructure.Migrations;
+
+using Microsoft.EntityFrameworkCore.Migrations;
+
+/// <inheritdoc />
+public partial class FixOrderitemseqSchema : Migration
 {
-    using Microsoft.EntityFrameworkCore.Migrations;
+    /// <inheritdoc />
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.RenameSequence(
+            name: "orderitemseq",
+            newName: "orderitemseq",
+            newSchema: "ordering");
+
+        migrationBuilder.AlterColumn<int>(
+            name: "Id",
+            schema: "ordering",
+            table: "orderstatus",
+            type: "integer",
+            nullable: false,
+            oldClrType: typeof(int),
+            oldType: "integer",
+            oldDefaultValue: 1);
+
+        migrationBuilder.AlterColumn<int>(
+            name: "Id",
+            schema: "ordering",
+            table: "cardtypes",
+            type: "integer",
+            nullable: false,
+            oldClrType: typeof(int),
+            oldType: "integer",
+            oldDefaultValue: 1);
+    }
 
     /// <inheritdoc />
-    public partial class FixOrderitemseqSchema : Migration
+    protected override void Down(MigrationBuilder migrationBuilder)
     {
-        /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.RenameSequence(
-                name: "orderitemseq",
-                newName: "orderitemseq",
-                newSchema: "ordering");
+        migrationBuilder.RenameSequence(
+            name: "orderitemseq",
+            schema: "ordering",
+            newName: "orderitemseq");
 
-            migrationBuilder.AlterColumn<int>(
-                name: "Id",
-                schema: "ordering",
-                table: "orderstatus",
-                type: "integer",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "integer",
-                oldDefaultValue: 1);
+        migrationBuilder.AlterColumn<int>(
+            name: "Id",
+            schema: "ordering",
+            table: "orderstatus",
+            type: "integer",
+            nullable: false,
+            defaultValue: 1,
+            oldClrType: typeof(int),
+            oldType: "integer");
 
-            migrationBuilder.AlterColumn<int>(
-                name: "Id",
-                schema: "ordering",
-                table: "cardtypes",
-                type: "integer",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "integer",
-                oldDefaultValue: 1);
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.RenameSequence(
-                name: "orderitemseq",
-                schema: "ordering",
-                newName: "orderitemseq");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "Id",
-                schema: "ordering",
-                table: "orderstatus",
-                type: "integer",
-                nullable: false,
-                defaultValue: 1,
-                oldClrType: typeof(int),
-                oldType: "integer");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "Id",
-                schema: "ordering",
-                table: "cardtypes",
-                type: "integer",
-                nullable: false,
-                defaultValue: 1,
-                oldClrType: typeof(int),
-                oldType: "integer");
-        }
+        migrationBuilder.AlterColumn<int>(
+            name: "Id",
+            schema: "ordering",
+            table: "cardtypes",
+            type: "integer",
+            nullable: false,
+            defaultValue: 1,
+            oldClrType: typeof(int),
+            oldType: "integer");
     }
 }

@@ -9,132 +9,131 @@ using Pgvector;
 
 #nullable disable
 
-namespace eShop.Catalog.API.Infrastructure.Migrations
+namespace eShop.Catalog.API.Infrastructure.Migrations;
+
+[DbContext(typeof(CatalogContext))]
+[Migration("20231018163051_RemoveHiLoAndIndexCatalogName")]
+partial class RemoveHiLoAndIndexCatalogName
 {
-    [DbContext(typeof(CatalogContext))]
-    [Migration("20231018163051_RemoveHiLoAndIndexCatalogName")]
-    partial class RemoveHiLoAndIndexCatalogName
+    /// <inheritdoc />
+    protected override void BuildTargetModel(ModelBuilder modelBuilder)
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0-rc.2.23480.1")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+        modelBuilder
+            .HasAnnotation("ProductVersion", "8.0.0-rc.2.23480.1")
+            .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "vector");
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+        NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "vector");
+        NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("eShop.Catalog.API.Model.CatalogBrand", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+        modelBuilder.Entity("eShop.Catalog.API.Model.CatalogBrand", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                b.Property<string>("Brand")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("character varying(100)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("CatalogBrand", (string)null);
-                });
+                b.ToTable("CatalogBrand", (string)null);
+            });
 
-            modelBuilder.Entity("eShop.Catalog.API.Model.CatalogItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+        modelBuilder.Entity("eShop.Catalog.API.Model.CatalogItem", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AvailableStock")
-                        .HasColumnType("integer");
+                b.Property<int>("AvailableStock")
+                    .HasColumnType("integer");
 
-                    b.Property<int>("CatalogBrandId")
-                        .HasColumnType("integer");
+                b.Property<int>("CatalogBrandId")
+                    .HasColumnType("integer");
 
-                    b.Property<int>("CatalogTypeId")
-                        .HasColumnType("integer");
+                b.Property<int>("CatalogTypeId")
+                    .HasColumnType("integer");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
+                b.Property<string>("Description")
+                    .HasColumnType("text");
 
-                    b.Property<Vector>("Embedding")
-                        .HasColumnType("vector(1536)");
+                b.Property<Vector>("Embedding")
+                    .HasColumnType("vector(1536)");
 
-                    b.Property<int>("MaxStockThreshold")
-                        .HasColumnType("integer");
+                b.Property<int>("MaxStockThreshold")
+                    .HasColumnType("integer");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnType("character varying(50)");
 
-                    b.Property<bool>("OnReorder")
-                        .HasColumnType("boolean");
+                b.Property<bool>("OnReorder")
+                    .HasColumnType("boolean");
 
-                    b.Property<string>("PictureFileName")
-                        .HasColumnType("text");
+                b.Property<string>("PictureFileName")
+                    .HasColumnType("text");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
+                b.Property<decimal>("Price")
+                    .HasColumnType("numeric");
 
-                    b.Property<int>("RestockThreshold")
-                        .HasColumnType("integer");
+                b.Property<int>("RestockThreshold")
+                    .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("CatalogBrandId");
+                b.HasIndex("CatalogBrandId");
 
-                    b.HasIndex("CatalogTypeId");
+                b.HasIndex("CatalogTypeId");
 
-                    b.HasIndex("Name");
+                b.HasIndex("Name");
 
-                    b.ToTable("Catalog", (string)null);
-                });
+                b.ToTable("Catalog", (string)null);
+            });
 
-            modelBuilder.Entity("eShop.Catalog.API.Model.CatalogType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+        modelBuilder.Entity("eShop.Catalog.API.Model.CatalogType", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                b.Property<string>("Type")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("character varying(100)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("CatalogType", (string)null);
-                });
+                b.ToTable("CatalogType", (string)null);
+            });
 
-            modelBuilder.Entity("eShop.Catalog.API.Model.CatalogItem", b =>
-                {
-                    b.HasOne("eShop.Catalog.API.Model.CatalogBrand", "CatalogBrand")
-                        .WithMany()
-                        .HasForeignKey("CatalogBrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+        modelBuilder.Entity("eShop.Catalog.API.Model.CatalogItem", b =>
+            {
+                b.HasOne("eShop.Catalog.API.Model.CatalogBrand", "CatalogBrand")
+                    .WithMany()
+                    .HasForeignKey("CatalogBrandId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("eShop.Catalog.API.Model.CatalogType", "CatalogType")
-                        .WithMany()
-                        .HasForeignKey("CatalogTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasOne("eShop.Catalog.API.Model.CatalogType", "CatalogType")
+                    .WithMany()
+                    .HasForeignKey("CatalogTypeId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.Navigation("CatalogBrand");
+                b.Navigation("CatalogBrand");
 
-                    b.Navigation("CatalogType");
-                });
+                b.Navigation("CatalogType");
+            });
 #pragma warning restore 612, 618
-        }
     }
 }
