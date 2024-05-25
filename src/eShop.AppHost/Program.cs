@@ -7,8 +7,10 @@ builder.AddForwardedHeaders();
 
 var redis = builder.AddRedis("redis");
 var rabbitMq = builder.AddRabbitMQ("eventbus");
-var postgres = builder.AddPostgres("postgres")
+
+var postgres = builder.AddPostgres("postgres", null, null, 64612)
     .WithImage("ankane/pgvector")
+    .WithPgAdmin()
     .WithImageTag("latest");
 
 var catalogDb = postgres.AddDatabase("catalogdb");
