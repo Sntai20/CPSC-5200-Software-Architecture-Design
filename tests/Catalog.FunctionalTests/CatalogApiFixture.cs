@@ -1,5 +1,4 @@
 ﻿namespace eShop.Catalog.FunctionalTests;
-using System.Reflection;
 using Microsoft.AspNetCore.Mvc.Testing;
 
 public sealed class CatalogApiFixture : WebApplicationFactory<Program>, IAsyncLifetime

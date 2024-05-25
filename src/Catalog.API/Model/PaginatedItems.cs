@@ -1,6 +1,4 @@
 ﻿namespace eShop.Catalog.API.Model;
-using System.Text.Json.Serialization;
-
 public class PaginatedItems<TEntity>(int pageIndex, int pageSize, long count, IEnumerable<TEntity> data) where TEntity : class
 {
     public int PageIndex { get; } = pageIndex;
