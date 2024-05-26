@@ -6,7 +6,7 @@
     <MicrosoftExtensionsVersion>8.3.0</MicrosoftExtensionsVersion>
     <EfVersion>8.0.3</EfVersion>
     <AspireVersion>8.0.0-preview.5.24201.12</AspireVersion>
-    <GrpcVersion>2.62.0</GrpcVersion>
+    <GrpcVersion>2.63.0</GrpcVersion>
     <DuendeVersion>7.0.4</DuendeVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -49,14 +49,14 @@
     <!-- Xabaril packages -->
     <PackageVersion Include="AspNetCore.HealthChecks.Uris" Version="8.0.1" />
     <!-- AI -->
-    <PackageVersion Include="Microsoft.SemanticKernel" Version="1.12.0" />
+    <PackageVersion Include="Microsoft.SemanticKernel" Version="1.13.0" />
     <!-- Open Telemetry -->
     <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.8.1" />
     <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.8.1" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.8.1" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.6.0-beta.3" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.8.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.8.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.8.1" />
     <!-- IdentityServer -->
     <PackageVersion Include="Duende.IdentityServer" Version="$(DuendeVersion)" />
     <PackageVersion Include="Duende.IdentityServer.AspNetIdentity" Version="$(DuendeVersion)" />
@@ -64,13 +64,13 @@
     <PackageVersion Include="Duende.IdentityServer.EntityFramework.Storage" Version="$(DuendeVersion)" />
     <PackageVersion Include="Duende.IdentityServer.Storage" Version="$(DuendeVersion)" />
     <!-- VS Test -->
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
     <!-- Scaffolding -->
     <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0-rc.1.23461.3" />
     <!-- Grpc -->
     <PackageVersion Include="Grpc.AspNetCore" Version="$(GrpcVersion)" />
     <PackageVersion Include="Grpc.AspNetCore.Server.ClientFactory" Version="$(GrpcVersion)" />
-    <PackageVersion Include="Grpc.Tools" Version="2.63.0" PrivateAssets="All" />
+    <PackageVersion Include="Grpc.Tools" Version="2.64.0" PrivateAssets="All" />
     <!-- Miscellaneous -->
     <PackageVersion Include="Automapper" Version="13.0.1" />
     <PackageVersion Include="Dapper" Version="2.1.44" />
@@ -78,7 +78,7 @@
     <PackageVersion Include="MediatR" Version="12.2.0" />
     <PackageVersion Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
     <PackageVersion Include="Polly" Version="8.4.0" />
-    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.6.1" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageVersion Include="System.Reflection.TypeExtensions" Version="4.7.0" />
     <PackageVersion Include="xunit" Version="2.8.0" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.0" />
