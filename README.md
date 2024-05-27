@@ -38,7 +38,7 @@ dotnet restore eShop.Web.slnf
 
 * Or run the application from your terminal:
 ```powershell
-dotnet run --project src/eShop.AppHost/eShop.AppHost.csproj
+dotnet run --project eShop.AppHost/eShop.AppHost.csproj
 ```
 then look for lines like this in the console output in order to find the URL to open the Aspire dashboard:
 ```sh
