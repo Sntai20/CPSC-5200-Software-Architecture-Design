@@ -1,15 +1,18 @@
-﻿@page "/products"
+﻿@page "/"
 @using DataEntities
+@using Microsoft.AspNetCore.Components.Sections
 @using eShopLite.Frontend.Services
 @inject ProductService ProductService
 @inject IConfiguration Configuration
 @attribute [StreamRendering(true)]
 
-<PageTitle>Products</PageTitle>
+<PageTitle>SeattleU eShop</PageTitle>
+<SectionContent SectionName="page-header-title">Ready for a new adventure?</SectionContent>
+<SectionContent SectionName="page-header-subtitle">Start the season with the latest in clothing and equipment.</SectionContent>
 
 <h1>Products</h1>
 
-<p>Here are some of our amazing outdoor products that you can purchase.</p>
+<p>Welcome to the best e-commerce platform in the world - eShopLite! Here are some of our amazing outdoor products that you can purchase.</p>
 
 @if (products == null)
 {
