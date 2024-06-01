@@ -10,6 +10,20 @@ A reference .NET application implementing an eCommerce web site using a services
 
 ## Getting Started
 
+### Features and requirements
+Let's start with a review of the application's features and requirements. The eShopOnContainers application represents an online store that sells various physical products like t-shirts and coffee mugs. If you've bought anything online before, the experience of using the store should be relatively familiar. Here are some of the basic features the store implements:
+
+List catalog items
+Filter items by type
+Filter items by brand
+Add items to the shopping basket
+Edit or remove items from the basket
+Checkout
+Register an account
+Sign in
+Sign out
+Review orders
+
 ### Prerequisites
 
 - Clone the eShop repository: https://github.com/dotnet/eshop

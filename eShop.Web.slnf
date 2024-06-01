@@ -4,10 +4,7 @@
     "projects": [
       "Basket.API\\Basket.API.csproj",
       "Catalog.API\\Catalog.API.csproj",
-      "EventBusRabbitMQ\\EventBusRabbitMQ.csproj",
-      "EventBus\\EventBus.csproj",
       "Identity.API\\Identity.API.csproj",
-      "IntegrationEventLogEF\\IntegrationEventLogEF.csproj",
       "OrderProcessor\\OrderProcessor.csproj",
       "Ordering.API\\Ordering.API.csproj",
       "Ordering.Domain\\Ordering.Domain.csproj",
@@ -17,12 +14,7 @@
       "WebApp\\WebApp.csproj",
       "WebhookClient\\WebhookClient.csproj",
       "Webhooks.API\\Webhooks.API.csproj",
-      "eShop.AppHost\\eShop.AppHost.csproj",
-      "eShop.ServiceDefaults\\eShop.ServiceDefaults.csproj",
-      "tests\\Basket.UnitTests\\Basket.UnitTests.csproj",
-      "tests\\Catalog.FunctionalTests\\Catalog.FunctionalTests.csproj",
-      "tests\\Ordering.FunctionalTests\\Ordering.FunctionalTests.csproj",
-      "tests\\Ordering.UnitTests\\Ordering.UnitTests.csproj"
+      "eShop.AppHost\\eShop.AppHost.csproj"
     ]
   }
 }
