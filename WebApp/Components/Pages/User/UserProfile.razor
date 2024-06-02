@@ -1,0 +1,78 @@
+﻿@page "/user/userprofile"
+@attribute [Authorize]
+@attribute [StreamRendering]
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject UserProfileService ProfileService
+
+<PageTitle>User Profile | SeattleU eShop</PageTitle>
+<SectionContent SectionName="page-header-title">Edit Profile</SectionContent>
+<OrdersRefreshOnStatusChange />
+
+<div class="userProfile">
+    @if (userProfile is null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <div class="userProfile-item">
+            <label for="name">Name: @userProfile.Name</label>
+        </div>
+        <div class="userProfile-item">
+            <label for="lastName">Last Name: @userProfile.LastName</label>
+        </div>
+        <div class="userProfile-item">
+            <label for="email">Email Verified: @userProfile.EmailVerified</label>
+        </div>
+        <div class="userProfile-item">
+            <label for="email">Email: @userProfile.Email</label>
+        </div>
+        <button type="submit">Update Profile</button>
+        @if (isUpdating)
+        {
+            <p>Updating...</p>
+        }
+        else if (!string.IsNullOrWhiteSpace(updateMessage))
+        {
+            <p>@updateMessage</p>
+        }
+    }
+</div>
+
+@code {
+    private UserProfileService.UserProfile? userProfile;
+    private bool isUpdating;
+    private string updateMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        userProfile = await ProfileService.GetUserProfile();
+    }
+
+    private async Task UpdateProfile()
+    {
+        if (userProfile is not null)
+        {
+            isUpdating = true;
+            try
+            {
+                var message = await ProfileService.UpdateProfile(userProfile);
+                if (message.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    updateMessage = "Profile updated successfully!";
+                    // Re-fetch the user profile to get the updated information
+                    userProfile = await ProfileService.GetUserProfile();
+                }
+            }
+            catch (Exception)
+            {
+                updateMessage = "An error occurred while updating the profile.";
+            }
+            finally
+            {
+                isUpdating = false;
+            }
+        }
+    }
+}
