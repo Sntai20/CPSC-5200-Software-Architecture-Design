@@ -3,6 +3,7 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject OrderStatusNotificationService OrderStatusNotificationService
 @inject NavigationManager Nav
+@inject UserProfileService ProfileService
 @implements IDisposable
 @code {
     private IDisposable? orderStatusChangedSubscription;
@@ -11,7 +12,7 @@
     {
         if (firstRender)
         {
-            var buyerId = await AuthenticationStateProvider.GetBuyerIdAsync();
+            var buyerId = await ProfileService.GetBuyerIdAsync();
             if (!string.IsNullOrEmpty(buyerId))
             {
                 orderStatusChangedSubscription = OrderStatusNotificationService.SubscribeToOrderStatusNotifications(

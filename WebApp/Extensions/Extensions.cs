@@ -103,18 +103,4 @@ public static class Extensions
             builder.Services.AddAzureOpenAIChatCompletion(deploymentName);
         }
     }
-
-    public static async Task<string?> GetBuyerIdAsync(this AuthenticationStateProvider authenticationStateProvider)
-    {
-        var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        return user.FindFirst("sub")?.Value;
-    }
-
-    public static async Task<string?> GetUserNameAsync(this AuthenticationStateProvider authenticationStateProvider)
-    {
-        var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        return user.FindFirst("name")?.Value;
-    }
 }

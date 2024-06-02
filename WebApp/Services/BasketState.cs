@@ -1,7 +1,6 @@
 ﻿namespace eShop.WebApp.Services;
-using System.Security.Claims;
+
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using eShop.WebAppComponents.Catalog;
 using eShop.WebAppComponents.Services;
 
@@ -9,7 +8,7 @@ public class BasketState(
     BasketService basketService,
     CatalogService catalogService,
     OrderingService orderingService,
-    AuthenticationStateProvider authenticationStateProvider)
+    UserProfileService userProfileService)
 {
     private Task<IReadOnlyCollection<BasketItem>>? _cachedBasket;
     private HashSet<BasketStateChangedSubscription> _changeSubscriptions = new();
@@ -18,7 +17,7 @@ public class BasketState(
         => basketService.DeleteBasketAsync();
 
     public async Task<IReadOnlyCollection<BasketItem>> GetBasketItemsAsync()
-        => (await GetUserAsync()).Identity?.IsAuthenticated == true
+        => (await userProfileService.GetUserAsync()).Identity?.IsAuthenticated == true
         ? await FetchBasketItemsAsync()
         : [];
 
@@ -81,8 +80,8 @@ public class BasketState(
             checkoutInfo.RequestId = Guid.NewGuid();
         }
 
-        var buyerId = await authenticationStateProvider.GetBuyerIdAsync() ?? throw new InvalidOperationException("User does not have a buyer ID");
-        var userName = await authenticationStateProvider.GetUserNameAsync() ?? throw new InvalidOperationException("User does not have a user name");
+        var buyerId = await userProfileService.GetBuyerIdAsync() ?? throw new InvalidOperationException("User does not have a buyer ID");
+        var userName = await userProfileService.GetUserNameAsync() ?? throw new InvalidOperationException("User does not have a user name");
 
         // Get details for the items in the basket
         var orderItems = await FetchBasketItemsAsync();
@@ -109,9 +108,6 @@ public class BasketState(
 
     private Task NotifyChangeSubscribersAsync()
         => Task.WhenAll(_changeSubscriptions.Select(s => s.NotifyAsync()));
-
-    private async Task<ClaimsPrincipal> GetUserAsync()
-        => (await authenticationStateProvider.GetAuthenticationStateAsync()).User;
 
     private Task<IReadOnlyCollection<BasketItem>> FetchBasketItemsAsync()
     {

@@ -47,7 +47,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        userProfile = await ProfileService.GetUserProfile();
+        userProfile = await ProfileService.GetUserProfileAsync();
     }
 
     private async Task UpdateProfile()
@@ -62,7 +62,7 @@
                 {
                     updateMessage = "Profile updated successfully!";
                     // Re-fetch the user profile to get the updated information
-                    userProfile = await ProfileService.GetUserProfile();
+                    userProfile = await ProfileService.GetUserProfileAsync();
                 }
             }
             catch (Exception)
