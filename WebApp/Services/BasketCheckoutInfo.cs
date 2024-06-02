@@ -1,4 +1,5 @@
 ﻿namespace eShop.WebApp.Services;
+
 using System.ComponentModel.DataAnnotations;
 
 public class BasketCheckoutInfo
