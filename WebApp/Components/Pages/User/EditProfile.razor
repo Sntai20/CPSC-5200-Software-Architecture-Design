@@ -1,4 +1,4 @@
-﻿@page "/user/userprofile"
+﻿@page "/user/editprofile"
 @attribute [Authorize]
 @attribute [StreamRendering]
 @using Microsoft.AspNetCore.Components.Authorization
@@ -23,12 +23,10 @@
             <label for="lastName">Last Name: @userProfile.LastName</label>
         </div>
         <div class="userProfile-item">
-            <label for="email">Email Verified: @userProfile.EmailVerified</label>
-        </div>
-        <div class="userProfile-item">
             <label for="email">Email: @userProfile.Email</label>
+            <input type="email" id="email" @bind="@userProfile.Email" />
         </div>
-        <button type="submit">Update Profile</button>
+        <button type="submit" @onclick="UpdateProfile">Update Profile</button>
         @if (isUpdating)
         {
             <p>Updating...</p>
@@ -41,29 +39,25 @@
 </div>
 
 @code {
+    [CascadingParameter]
+    public HttpContext? HttpContext { get; set; }
     private UserProfileService.UserProfile? userProfile;
     private bool isUpdating;
     private string updateMessage = "";
 
     protected override async Task OnInitializedAsync()
     {
-        userProfile = await ProfileService.GetUserProfileAsync();
+        userProfile = await ProfileService.GetProfileData(HttpContext!);
     }
 
-    private async Task UpdateProfile()
+    public async Task UpdateProfile()
     {
         if (userProfile is not null)
         {
             isUpdating = true;
             try
             {
-                var message = await ProfileService.UpdateProfile(userProfile);
-                if (message.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    updateMessage = "Profile updated successfully!";
-                    // Re-fetch the user profile to get the updated information
-                    userProfile = await ProfileService.GetUserProfileAsync();
-                }
+                userProfile = await ProfileService.UpdateProfileData(HttpContext!, userProfile);
             }
             catch (Exception)
             {
