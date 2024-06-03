@@ -1,7 +1,7 @@
 ﻿@page "/user/cascade-auth-state"
 @using Microsoft.AspNetCore.Components.Authorization
 
-<h1>Cascade Auth State</h1>
+<h1>Authentication State and Authorization Check</h1>
 
 <p>@authMessage</p>
 
@@ -20,13 +20,14 @@
 
             if (user?.Identity is not null && user.Identity.IsAuthenticated)
             {
+                var name = user.FindFirst("name").Value;
                 if (user.IsInRole("Admin"))
                 {
-                    authMessage = $"{user.Identity.Name} is authenticated and in the Admin role.";
+                    authMessage = $"{name} is authenticated and in the Admin role.";
                 }
                 else
                 {
-                    authMessage = $"{user.Identity.Name} is authenticated but not in the Admin role.";
+                    authMessage = $"{name} is authenticated, but not in the Admin role.";
                 }
             }
         }
