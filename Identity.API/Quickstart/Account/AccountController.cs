@@ -3,6 +3,8 @@
 
 namespace IdentityServerHost.Quickstart.UI;
 
+using eShop.Identity.API.Models.AccountViewModels;
+
 [SecurityHeaders]
 [AllowAnonymous]
 public class AccountController : Controller
@@ -31,6 +33,35 @@ public class AccountController : Controller
         _schemeProvider = schemeProvider;
         _handlerProvider = handlerProvider;
         _events = events;
+    }
+
+    [HttpGet]
+    public IActionResult Register()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Register(RegisterViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+        }
+
+        // If we got this far, something failed, redisplay form
+        return View(model);
     }
 
     /// <summary>
