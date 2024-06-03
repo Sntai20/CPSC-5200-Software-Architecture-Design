@@ -20,7 +20,7 @@
 
             if (user?.Identity is not null && user.Identity.IsAuthenticated)
             {
-                var name = user.FindFirst("name").Value;
+                string name = user.FindFirst("name")?.Value ?? string.Empty;
                 if (user.IsInRole("Admin"))
                 {
                     authMessage = $"{name} is authenticated and in the Admin role.";
