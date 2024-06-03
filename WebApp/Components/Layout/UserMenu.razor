@@ -13,6 +13,7 @@
             <div class="dropdown-content">
                 <a class="dropdown-item" href="user/orders">My orders</a>
                 <a class="dropdown-item" href="user/editprofile">Edit profile</a>
+                <a class="dropdown-item" href="user/cascade-auth-state">View authentication state</a>
                 <form class="dropdown-item" method="post" action="user/logout" @formname="logout" @onsubmit="LogOutAsync">
                     <AntiforgeryToken />
                     <button type="submit">Log out</button>

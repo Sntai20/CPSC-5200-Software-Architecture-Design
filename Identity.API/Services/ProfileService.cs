@@ -11,16 +11,22 @@ public class ProfileService : IProfileService
 
     public async Task GetProfileDataAsync(ProfileDataRequestContext context)
     {
-        var subject = context.Subject ?? throw new ArgumentNullException(nameof(context.Subject));
+        var user = await _userManager.GetUserAsync(context.Subject);
 
-        var subjectId = subject.Claims.Where(x => x.Type == "sub").FirstOrDefault()?.Value;
+        var roles = await _userManager.GetRolesAsync(user);
 
-        var user = await _userManager.FindByIdAsync(subjectId);
-        if (user == null)
-            throw new ArgumentException("Invalid subject identifier");
+        var claims = new List<Claim>
+        {
+            new Claim(JwtClaimTypes.Subject, user.Id),
+            new Claim(JwtClaimTypes.PreferredUserName, user.UserName),
+        };
 
-        var claims = GetClaimsFromUser(user);
-        context.IssuedClaims = claims.ToList();
+        foreach (var role in roles)
+        {
+            claims.Add(new Claim(JwtClaimTypes.Role, role));
+        }
+
+        context.IssuedClaims = claims;
     }
 
     public async Task IsActiveAsync(IsActiveContext context)

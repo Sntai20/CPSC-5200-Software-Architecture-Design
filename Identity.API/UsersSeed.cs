@@ -1,10 +1,32 @@
 ﻿
 namespace eShop.Identity.API;
 
-public class UsersSeed(ILogger<UsersSeed> logger, UserManager<ApplicationUser> userManager) : IDbSeeder<ApplicationDbContext>
+using Microsoft.AspNetCore.Identity;
+
+public class UsersSeed(
+    ILogger<UsersSeed> logger,
+    UserManager<ApplicationUser> userManager,
+    RoleManager<IdentityRole> roleManager) : IDbSeeder<ApplicationDbContext>
 {
     public async Task SeedAsync(ApplicationDbContext context)
     {
+        // Check if the Admin role exists and create it if it doesn't
+        if (!await roleManager.RoleExistsAsync("Admin"))
+        {
+            var role = new IdentityRole("Admin");
+            var result = await roleManager.CreateAsync(role);
+
+            if (!result.Succeeded)
+            {
+                throw new Exception(result.Errors.First().Description);
+            }
+
+            if (logger.IsEnabled(LogLevel.Debug))
+            {
+                logger.LogDebug("Admin role created");
+            }
+        }
+
         var alice = await userManager.FindByNameAsync("alice");
 
         if (alice == null)
@@ -40,6 +62,13 @@ public class UsersSeed(ILogger<UsersSeed> logger, UserManager<ApplicationUser> u
             if (logger.IsEnabled(LogLevel.Debug))
             {
                 logger.LogDebug("alice created");
+            }
+
+            var roleResult = await userManager.AddToRoleAsync(alice, "Admin");
+
+            if (!roleResult.Succeeded)
+            {
+                throw new Exception(roleResult.Errors.First().Description);
             }
         }
         else

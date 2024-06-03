@@ -11,9 +11,16 @@ builder.AddNpgsqlDbContext<ApplicationDbContext>("identitydb");
 // migrations instead.
 builder.Services.AddMigration<ApplicationDbContext, UsersSeed>();
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-        .AddEntityFrameworkStores<ApplicationDbContext>()
-        .AddDefaultTokenProviders();
+builder.Services
+    .AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders()
+    .AddRoles<IdentityRole>();
+
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizePage("/user/cascade-auth-state");
+});
 
 builder.Services.AddIdentityServer(options =>
 {
