@@ -33,6 +33,7 @@ public record RegisterViewModel
     public string ZipCode { get; set; }
     public string Name { get; set; }
     public string LastName { get; set; }
+    public string ReturnUrl { get; set; }
 
     public ApplicationUser User { get; init; }
 }
