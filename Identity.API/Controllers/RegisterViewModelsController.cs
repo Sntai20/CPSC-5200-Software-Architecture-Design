@@ -53,7 +53,7 @@ public class RegisterViewModelsController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> RegisterCreate(RegisterViewModel model)
+    public async Task<IActionResult> Create(RegisterViewModel model)
     {
         if (ModelState.IsValid)
         {
@@ -101,7 +101,7 @@ public class RegisterViewModelsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,Email,Password,ConfirmPassword")] RegisterViewModel registerViewModel)
+    public async Task<IActionResult> OriginalCreate([Bind("Id,Email,Password,ConfirmPassword")] RegisterViewModel registerViewModel)
     {
         if (ModelState.IsValid)
         {
