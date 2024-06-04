@@ -7,13 +7,13 @@ using Microsoft.EntityFrameworkCore;
 using eShop.Identity.API.Data;
 using eShop.Identity.API.Models.AccountViewModels;
 
-public class RegisterViewModelsController : Controller
+public class RegisterController : Controller
 {
     private readonly ApplicationDbContext _context;
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public RegisterViewModelsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+    public RegisterController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
     {
         _context = context;
         _userManager = userManager;
@@ -21,13 +21,13 @@ public class RegisterViewModelsController : Controller
         _context = context;
     }
 
-    // GET: RegisterViewModels
+    // GET: Register
     public async Task<IActionResult> Index()
     {
         return View(await _context.RegisterViewModel.ToListAsync());
     }
 
-    // GET: RegisterViewModels/Details/5
+    // GET: Register/Details/5
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -90,13 +90,13 @@ public class RegisterViewModelsController : Controller
         return View(model);
     }
 
-    // GET: RegisterViewModels/Create
+    // GET: Register/Create
     public IActionResult Create()
     {
         return View();
     }
 
-    // POST: RegisterViewModels/Create
+    // POST: Register/Create
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
@@ -112,7 +112,7 @@ public class RegisterViewModelsController : Controller
         return View(registerViewModel);
     }
 
-    // GET: RegisterViewModels/Edit/5
+    // GET: Register/Edit/5
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null)
@@ -128,7 +128,7 @@ public class RegisterViewModelsController : Controller
         return View(registerViewModel);
     }
 
-    // POST: RegisterViewModels/Edit/5
+    // POST: Register/Edit/5
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
@@ -163,7 +163,7 @@ public class RegisterViewModelsController : Controller
         return View(registerViewModel);
     }
 
-    // GET: RegisterViewModels/Delete/5
+    // GET: Register/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -181,7 +181,7 @@ public class RegisterViewModelsController : Controller
         return View(registerViewModel);
     }
 
-    // POST: RegisterViewModels/Delete/5
+    // POST: Register/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
