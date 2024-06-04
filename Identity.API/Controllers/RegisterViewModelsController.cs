@@ -1,4 +1,5 @@
 ﻿namespace Identity.API.Controllers;
+
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -9,9 +10,14 @@ using eShop.Identity.API.Models.AccountViewModels;
 public class RegisterViewModelsController : Controller
 {
     private readonly ApplicationDbContext _context;
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public RegisterViewModelsController(ApplicationDbContext context)
+    public RegisterViewModelsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
     {
+        _context = context;
+        _userManager = userManager;
+        _signInManager = signInManager;
         _context = context;
     }
 
@@ -37,6 +43,51 @@ public class RegisterViewModelsController : Controller
         }
 
         return View(registerViewModel);
+    }
+
+    [HttpGet]
+    public IActionResult Register()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> RegisterCreate(RegisterViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var user = new ApplicationUser
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                CardNumber = model.CardNumber,
+                SecurityNumber = model.SecurityNumber,
+                Expiration = model.Expiration,
+                CardHolderName = model.CardHolderName,
+                CardType = model.CardType,
+                Street = model.Street,
+                City = model.City,
+                State = model.State,
+                Country = model.Country,
+                ZipCode = model.ZipCode,
+                Name = model.Name,
+                LastName = model.LastName
+            };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+        }
+
+        // If we got this far, something failed, redisplay form
+        return View(model);
     }
 
     // GET: RegisterViewModels/Create

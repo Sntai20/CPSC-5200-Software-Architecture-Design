@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 namespace Identity.API.Controllers;
-using eShop.Identity.API.Models.AccountViewModels;
+
 using Identity.API.Models.Account;
 
 [SecurityHeaders]
@@ -37,64 +37,6 @@ public class AccountController : Controller
         _events = events;
         _context = context;
     }
-
-    [HttpGet]
-    public IActionResult Register()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> RegisterCreate(RegisterViewModel model)
-    {
-        if (ModelState.IsValid)
-        {
-            var user = new ApplicationUser
-            {
-                UserName = model.Email,
-                Email = model.Email,
-                CardNumber = model.CardNumber,
-                SecurityNumber = model.SecurityNumber,
-                Expiration = model.Expiration,
-                CardHolderName = model.CardHolderName,
-                CardType = model.CardType,
-                Street = model.Street,
-                City = model.City,
-                State = model.State,
-                Country = model.Country,
-                ZipCode = model.ZipCode,
-                Name = model.Name,
-                LastName = model.LastName
-            };
-            var result = await _userManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
-            {
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction(nameof(HomeController.Index), "Home");
-            }
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
-        }
-
-        // If we got this far, something failed, redisplay form
-        return View(model);
-    }
-
-    //[HttpPost]
-    //[ValidateAntiForgeryToken]
-    //public async Task<IActionResult> RegisterCreate([Bind("Id,Email,Password,ConfirmPassword")] RegisterViewModel registerViewModel)
-    //{
-    //    if (ModelState.IsValid)
-    //    {
-    //        _context.Add(registerViewModel);
-    //        await _context.SaveChangesAsync();
-    //        return RedirectToAction(nameof(Index));
-    //    }
-    //    return View(registerViewModel);
-    //}
 
     /// <summary>
     /// Entry point into the login workflow
