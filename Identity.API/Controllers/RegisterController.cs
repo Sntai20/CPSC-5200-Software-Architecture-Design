@@ -1,4 +1,5 @@
 ﻿namespace Identity.API.Controllers;
+
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -6,22 +7,27 @@ using Microsoft.EntityFrameworkCore;
 using eShop.Identity.API.Data;
 using eShop.Identity.API.Models.AccountViewModels;
 
-public class RegisterViewModelsController : Controller
+public class RegisterController : Controller
 {
     private readonly ApplicationDbContext _context;
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public RegisterViewModelsController(ApplicationDbContext context)
+    public RegisterController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
     {
+        _context = context;
+        _userManager = userManager;
+        _signInManager = signInManager;
         _context = context;
     }
 
-    // GET: RegisterViewModels
+    // GET: Register
     public async Task<IActionResult> Index()
     {
         return View(await _context.RegisterViewModel.ToListAsync());
     }
 
-    // GET: RegisterViewModels/Details/5
+    // GET: Register/Details/5
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -39,18 +45,63 @@ public class RegisterViewModelsController : Controller
         return View(registerViewModel);
     }
 
-    // GET: RegisterViewModels/Create
+    [HttpGet]
+    public IActionResult Register()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create(RegisterViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var user = new ApplicationUser
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                CardNumber = model.CardNumber,
+                SecurityNumber = model.SecurityNumber,
+                Expiration = model.Expiration,
+                CardHolderName = model.CardHolderName,
+                CardType = model.CardType,
+                Street = model.Street,
+                City = model.City,
+                State = model.State,
+                Country = model.Country,
+                ZipCode = model.ZipCode,
+                Name = model.Name,
+                LastName = model.LastName
+            };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+        }
+
+        // If we got this far, something failed, redisplay form
+        return View(model);
+    }
+
+    // GET: Register/Create
     public IActionResult Create()
     {
         return View();
     }
 
-    // POST: RegisterViewModels/Create
+    // POST: Register/Create
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,Email,Password,ConfirmPassword")] RegisterViewModel registerViewModel)
+    public async Task<IActionResult> OriginalCreate([Bind("Id,Email,Password,ConfirmPassword")] RegisterViewModel registerViewModel)
     {
         if (ModelState.IsValid)
         {
@@ -61,7 +112,7 @@ public class RegisterViewModelsController : Controller
         return View(registerViewModel);
     }
 
-    // GET: RegisterViewModels/Edit/5
+    // GET: Register/Edit/5
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null)
@@ -77,7 +128,7 @@ public class RegisterViewModelsController : Controller
         return View(registerViewModel);
     }
 
-    // POST: RegisterViewModels/Edit/5
+    // POST: Register/Edit/5
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
@@ -112,7 +163,7 @@ public class RegisterViewModelsController : Controller
         return View(registerViewModel);
     }
 
-    // GET: RegisterViewModels/Delete/5
+    // GET: Register/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -130,7 +181,7 @@ public class RegisterViewModelsController : Controller
         return View(registerViewModel);
     }
 
-    // POST: RegisterViewModels/Delete/5
+    // POST: Register/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)

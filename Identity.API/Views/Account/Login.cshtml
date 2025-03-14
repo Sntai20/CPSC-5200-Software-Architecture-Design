@@ -1,4 +1,5 @@
 @model LoginViewModel
+@using Identity.API.Controllers
 
 <div class="login-page">
     <div class="container">
@@ -37,7 +38,7 @@
                                 <p>The default users are alice/bob, password: Pass123$</p>
                             </div>
                             <button class="btn btn-primary" name="button" value="login">Login</button>
-                            <button class="btn btn-primary" name="button" value="registercreate" asp-action="RegisterCreate">Register</button>
+                            <button class="btn btn-primary" name="button" value="create" asp-controller="Register" asp-action="Create">Register</button>
                         </div>
                     </form>
                 </div>
