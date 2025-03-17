@@ -2,7 +2,7 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
-    <AspnetVersion>8.0.8</AspnetVersion>
+    <AspnetVersion>8.0.14</AspnetVersion>
     <MicrosoftExtensionsVersion>9.3.0</MicrosoftExtensionsVersion>
     <EfVersion>8.0.10</EfVersion>
     <AspireVersion>8.2.2</AspireVersion>
